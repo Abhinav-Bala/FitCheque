@@ -8,11 +8,15 @@ from time import sleep
 
 def find_last_page(soup):
     try:
-        last_page = page_soup.find('li', class_='pagination__last-page').text
+        last_page = soup.find('li', class_='pagination__last-page').text
         last_page = last_page.split("\n")
+        print(last_page[1]) # delete this
         return int(last_page[1])
     except IndexError:
         return 1
+    except AttributeError:
+        return 1
+    
 
 def scrape_product(soup, data, gen):
     #find all products in a page
@@ -48,12 +52,12 @@ session = requests.Session()
 session.headers.update({'User-Agent': ua.random})
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0'}
 
-for i in range(len(categories) - 1, len(categories)):
-    
-    cat_list = []
+for i in range(0, len(categories)):
 
     for g in gender:
 
+        cat_list = []
+        
         # parse html
         url = construct_url(categories[i], g)
         page = session.get(url,headers=headers)
@@ -71,12 +75,8 @@ for i in range(len(categories) - 1, len(categories)):
             page_soup = BeautifulSoup(page.content, 'html.parser')
             scrape_product(page_soup, cat_list, g)
             curr_page+=1
-            break # delete this on lamda
+            
     
         # generates the dataframe    
         df = pd.DataFrame.from_dict(cat_list)
         df.to_csv(categories[i] + '-' + g + '.csv')
-
-
-
-
