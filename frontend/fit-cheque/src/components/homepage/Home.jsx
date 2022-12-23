@@ -20,7 +20,6 @@ const Homepage = () => {
   return (
       <div className='flex flex-row justify-center h-screen'>
         <div className='lg:basis-2/5 lg:bg-red-300 lg:flex hidden'>
-        
         </div>
         <div className='basis-3/5 bg-blue-300 flex'>
           <div className='p-24 bg-green-300 m-auto grid-cols-1 flex flex-col space-y-4'>
