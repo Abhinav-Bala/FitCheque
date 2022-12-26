@@ -2,7 +2,7 @@ import React from 'react'
 
 const Lobby = () => {
   return (
-    <div>Lobby</div>
+    <div className='text-title'>Lobby</div>
   )
 }
 

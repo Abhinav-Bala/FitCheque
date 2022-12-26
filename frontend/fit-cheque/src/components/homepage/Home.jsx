@@ -4,7 +4,7 @@ import createId from '../../utils/roomCodeGenerator';
 import {Link} from 'react-router-dom';
 
 
-const Homepage = () => {
+const Home = () => {
   const [roomCode, setRoomCode] = useState("")
   const [error, setError] = useState(false)
 
@@ -55,4 +55,4 @@ const Homepage = () => {
 
 
 
-export default Homepage
+export default Home;
