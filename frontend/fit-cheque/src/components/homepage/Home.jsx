@@ -18,27 +18,30 @@ const Homepage = () => {
   }
 
   return (
-      <div className='flex flex-row justify-center h-screen'>
-        <div className='lg:basis-2/5 lg:bg-red-300 lg:flex hidden'>
-        </div>
-        <div className='basis-3/5 bg-blue-300 flex'>
-          <div className='p-24 bg-green-300 m-auto grid-cols-1 flex flex-col space-y-4'>
-            <h1 className='text-8xl pb-6 font-extrabold'>Fit Cheque</h1>
-            <div className='flex flex-col space-y-2 text-center'>
-              <input className='text-center rounded-full h-16 text-3xl font-bold' placeholder='enter game code' onChange={event => setRoomCode(event.target.value)} value={roomCode}></input>
-              {error ? (
-                <p claseName='text-sm text-center' role="alert" style={{ color: "rgb(255, 0, 0)" }}>
-                 Invalid code
-                </p>
-              ) : <div className='h-1'/>}
-              <button className=' text-3xl font-bold  bg-yellow-200 text-center rounded-full h-16'
-              onClick={validateRoomCode}>join</button>
+     <div>
+      <div className='fixed top-4 left-4 right-0 text-9xl font-extrabold z-50'>
+        Fit Cheque
+      </div>
+      <div className='h-screen w-screen grid grid-cols-12'>
+        <div className="col-span-4 h-screen bg-[url('/assets/receipt.jpg')]">
+            <div className='flex flex-col py-40 px-4 gap-4 place-content-start font-semibold text-3xl'>
+              <button>
+                <div className=' hover:underline hover:cursor-pointer'>
+                HOST
+                </div>
+              </button>
+              <button>
+                <div className=' hover:underline hover:cursor-pointer'>
+                JOIN
+                </div>
+              </button>
             </div>
-            <h3 className='text-xl font-semibold text-center'>or</h3>
-            <button className='bg-yellow-200 text-3xl font-bold  text-center rounded-full h-16'>create</button>
-          </div>
+        </div>
+        <div className='col-span-8 h-screen bg-white'>
+
         </div>
       </div>
+     </div>
   )
 }
 

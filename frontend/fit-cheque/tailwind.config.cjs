@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./index.html" ,"./src/**/*.{jsx,js}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        display: ["Chivo Mono", "monospace"],
+      },
+    },
   },
   plugins: [],
 }
