@@ -20,18 +20,18 @@ const Homepage = () => {
   return (
      <div>
       <div className='fixed top-4 left-4 right-0 text-9xl font-extrabold z-50'>
-        Fit Cheque
+        FIT CHEQUE
       </div>
       <div className='h-screen w-screen grid grid-cols-12'>
         <div className="col-span-4 h-screen bg-[url('/assets/receipt.jpg')]">
-            <div className='flex flex-col py-40 px-4 gap-4 place-content-start font-semibold text-3xl'>
+            <div className='grid grid-cols-1 py-40 px-4 gap-4 place-content-start text-3xl'>
               <button>
-                <div className=' hover:underline hover:cursor-pointer'>
+                <div className=' hover:underline hover:cursor-pointer text-left'>
                 HOST
                 </div>
               </button>
               <button>
-                <div className=' hover:underline hover:cursor-pointer'>
+                <div className=' hover:underline hover:cursor-pointer text-left'>
                 JOIN
                 </div>
               </button>

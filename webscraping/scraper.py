@@ -43,14 +43,14 @@ def construct_url(category, gender, page=''):
 # URLS
 main_page = 'https://www.ssense.com/en-ca/'
 gender = ['men', 'women']
-categories = ['accessories', 'bags', 'shoes', 'jackets-coats', 'tops', 'sweaters', 'pants', 'jeans', 'shorts']
+categories = ['jackets-coats']
 
 
 # setup requests
 ua = UserAgent()
 session = requests.Session()
 session.headers.update({'User-Agent': ua.random})
-headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0'}
+headers = {'User-Agent': "Mozilla/5.0 (Linux; Android 11; SM-G960U) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Mobile Safari/537.36"}
 
 for i in range(0, len(categories)):
 
@@ -62,16 +62,22 @@ for i in range(0, len(categories)):
         url = construct_url(categories[i], g)
         page = session.get(url,headers=headers)
         page_soup = BeautifulSoup(page.content, 'html.parser')
+
         page.close()
+        print(page_soup)
         scrape_product(page_soup, cat_list, g)
 
         last_page = find_last_page(page_soup)
-        
+        print(last_page)
+        last_page = last_page/2
+
         curr_page = 2
 
-        while curr_page <= 2: # change this to: while curr_page <= last_page:
+        while curr_page <= last_page: # change this to: while curr_page <= last_page:
             url = construct_url(categories[i], g, page=curr_page)
+            sleep(2)
             page = session.get(url,headers=headers)
+            
             page_soup = BeautifulSoup(page.content, 'html.parser')
             scrape_product(page_soup, cat_list, g)
             curr_page+=1
