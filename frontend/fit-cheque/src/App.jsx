@@ -4,10 +4,10 @@ import Home from './components/homepage/Home'
 import Lobby from './components/lobby/Lobby'
 function App() {
   return (
-    <div className="font-diaply">
+    <div className="font-display">
       <Routes>
         <Route path='/' exact element={<Home />} />
-        <Route path='/lobby' exact component={<Lobby/>} />
+        <Route path="/lobby" element={<Lobby/>} exact />
       </Routes>
     </div>
   )
