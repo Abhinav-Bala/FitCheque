@@ -1,9 +1,11 @@
 import React from 'react'
 import Home from './components/homepage/Home'
+import Lobby from './components/lobby/Lobby'
 function App() {
   return (
-    <div className="min-h-screen min-w-screen font-display">
-      <Home/>
+    <div className="font-display">
+      <Route path='/' exact component={Home} />
+      <Route path='/lobby' exact component={Game} />
     </div>
   )
 }
