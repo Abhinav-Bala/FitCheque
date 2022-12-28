@@ -6,13 +6,12 @@ import {Link} from 'react-router-dom';
 
 const Home = () => {
   const [roomCode, setRoomCode] = useState("")
-  const [error, setError] = useState(false)
 
   const validateRoomCode = (roomCode) => {
     //replace with try catch later
 
     if(roomCode !== '000' || roomCode !== ''){
-      setError(true)
+      alert("Please enter a valid room code")
       setRoomCode('')
     }
   }
@@ -37,13 +36,13 @@ const Home = () => {
                 </button>
               </form>  
              <div className='w-16 pt-8 pb-36'>
-              <button className=' underline underline-offset-8 hover:font-bold hover:cursor-pointer text-left text-heading'>
+              <button className='underline underline-offset-8 hover:font-bold hover:cursor-pointer text-left text-heading'>
                   HOST
-                </button>
-             </div>
-              <img src='/assets/barcode.png' className='h-16 w-full'/>
-              <div className='text-center'>Made by Abhinav and Sumedh. Designed by Lillian. Images retreived from SSENSE.</div>
+              </button>
             </div>
+            <img src='/assets/barcode.png' className='h-16 w-full'/>
+            <div className='text-center'>Made by Abhinav and Sumedh. Designed by Lillian. Images retreived from SSENSE.</div>
+          </div>
         </div>
         <div className='col-span-8 h-screen bg-white'>
 
