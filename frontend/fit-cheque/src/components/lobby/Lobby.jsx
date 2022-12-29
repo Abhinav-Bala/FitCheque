@@ -17,8 +17,8 @@ const main_bg = {
   };
 
 const list_bg = {
-  width: '30vw',
-  height: '55vh',
+  width: '35vw',
+  height: '60vh',
   backgroundImage: `url(${receipt})`,
   backgroundPosition: 'auto',
   backgroundSize: 'cover',
@@ -26,10 +26,9 @@ const list_bg = {
   opacity: '1',
 };
 
-
 const Lobby = () => {
   
-  const players = [
+    const players = [
     {user: "Alice", isReady: true, host: true},
     {user: "Bob", isReady: true},
     {user: "player3", isReady: false},
@@ -40,9 +39,13 @@ const Lobby = () => {
     {user: "player8", isReady: true},
     {user: "player9", isReady: true},
     {user: "player10", isReady: true},
+  ];
   
-  ]
-  
+  const [gamers, setGamers] = useState(players);
+
+  const newGamers = (arr) => {
+    setGamers(arr);
+  };
 
   const othername = () => {
     var input = document.getElementById("newName").value;
@@ -51,36 +54,38 @@ const Lobby = () => {
 
   return (
     <div> 
-      <div className='bg-white font-chivo' style={main_bg}>
+      <div className='bg-white' style={main_bg}>
   
-        <div className='absolute container flex flex-col-reverse items-center px-6 mx-auto mt-10'>
+        <div className='absolute container flex flex-col-reverse object-center items-center px-10 mt-10 ml-16'>
 
-          <div className='flex flex-col mb-32 space-y-2 text-black text-bold'>
-            <p className='animate-bounce text-center text-black text-7xl'>
+          <div className='flex flex-col mb-32 space-y-2 text-black text-heading font-semibold'>
+            <div className='animate-bounce text-center text-black text-9xl font-extrabold'>
               {roomCode}
-            </p>
+            </div>
             <hr className="my-8 text-gray-800 border-2"></hr>
-            <p className='text-center text-gray-800 font-bold text-2xl'>
-              {players.length}/10
+            <p className='text-center text-gray-800 font-bold text-4xl'>
+              {gamers.length}/10
             </p>
             <hr className="my-8 text-gray-800 border-2"></hr>
 
-            <div className="py-1 text-center inline-block space-x-1">
+            <div className="py-1 text-center flex space-x-1">
               <input className="px-16 py-3 bg-white text-l text-black outline outline-2" id="newName" maxLength={10} placeholder="CHANGE USERNAME...">
               </input>
-              <button className="px-2 pt-0.5 text-2xl text-bold rounded-none bg-black text-white material-symbols-outlined hover:bg-white hover:text-black active:rounded-none transition duration-150 ease-in-out" onClick={othername}>done</button>
+              <button className="px-2 pt-0.5 text-2xl text-bold rounded-none bg-black text-white material-symbols-outlined hover:bg-white hover:text-black active:rounded-none transition duration-150 ease-in-out" onClick={othername}>
+                  check
+                </button>
             </div>
           <div className='pl-4'>
             <div className='px-2 bg-local bg-center text-center' style={list_bg}>
             <div className='-center px-1 grid gap-1 font-chivo text-justify '>
-              {players.map((player) => {
-                return <UserList user={player.user} isReady={player.isReady} host={player.host}/>
+              {gamers.map((player, i) => {
+                return <UserList user={player.user} isReady={player.isReady} host={player.host} i={i} gamers={gamers} setGamers={newGamers} />
               })}
               </div>
             </div>
           </div>
             <div className='ml-4 flex justify-center space-x-10 pt-3 pb-0'>
-              <a href='#' className='px-4 py-3 text-black bg-gray-200 baseline hover:bg-black hover:text-white active:bg-green-400 focus:outline-white focus:animate-pulse focus:bg-green-400 focus:border-green-700 transition duration-150 ease-in-out'>
+              <a href='#' className='px-4 py-3 text-black bg-gray-200 baseline hover:bg-black hover:text-white active:bg-green-400 focus:outline-white focus:animate-pulse focus:text-white focus:bg-green-400 focus:border-green-700 transition duration-150 ease-in-out'>
                 <p className='max-w-3xl text-4xl w-auto h-auto text-center'>
                   READY
                 </p>
@@ -101,11 +106,11 @@ const Lobby = () => {
         </div>
 
         <div className='pt-3 pl-3 flex text-black'>
-          <a href='#' className='px-10 -left text-black bg-white baseline outline outline-gray-600 hover:bg-gray-400 hover:outline-white hover:text-white active:bg-gray-600 active:text-white focus:bg-gray-600 focus:text-white transition duration-150 ease-in-out'>
-            <p className='max-w-sm text-left text-2xl'>
+          <button href='#' className='font-semibold text-heading px-10 -left text-black bg-white baseline outline outline-gray-600 hover:bg-gray-400 hover:outline-white hover:text-white active:bg-gray-600 active:text-white focus:bg-gray-600 focus:text-white transition duration-150 ease-in-out'>
+            <p className='max-w-sm text-left'>
               BACK
             </p>
-          </a>
+          </button>
          
         </div> 
         <div className='absolute text-black pt-44 pl-20'>
