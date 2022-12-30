@@ -12,7 +12,7 @@ const UserList = ({user, isReady, host, i, gamers, setGamers}) => {
     };
 
        return(
-           <div className= "pt-2 text-left text-2xl grid grid-cols-1 grid-flow-col-dense items-center">
+           <div className= "font-normal pt-2 text-left grid grid-cols-1 grid-flow-col-dense justify-center items-center">
               
                {host ? 
 
@@ -49,7 +49,7 @@ const UserList = ({user, isReady, host, i, gamers, setGamers}) => {
 
                {isHost & i!=0 ? 
                   
-                   <div className='pl-10 flex col-span-6'>
+                   <div className='pl-6 flex col-span-6'>
                        <button className='px-2 text-black hover:bg-black hover:text-white active:bg-red-400 transition duration-150 ease-in-out' onClick={()=>remove(i)}>
                        <p className='max-w-sm text-right'>
                            X
