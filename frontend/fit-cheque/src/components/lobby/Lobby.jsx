@@ -1,11 +1,9 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import receipt from "/assets/receipt.jpg"
 import UserList from './UserList';
 
 export const isHost = true;
-
-const roomCode = "1234 5678";
 
 const main_bg = {
   width: '100vw',
@@ -27,27 +25,8 @@ const list_bg = {
   center: true,
 };
 
-const Lobby = () => {
+const Lobby = ({socket, roomData}) => {
   
-    const players = [
-    {user: "Alice", isReady: true, host: true},
-    {user: "Bob", isReady: true},
-    {user: "player3kk", isReady: false},
-    {user: "player4", isReady: true},
-    {user: "player5", isReady: true},
-    {user: "player6", isReady: false},
-    {user: "player7", isReady: false},
-    {user: "player8", isReady: true},
-    {user: "player9", isReady: true},
-    {user: "player10", isReady: true},
-  ];
-  
-  const [gamers, setGamers] = useState(players);
-
-  const newGamers = (arr) => {
-    setGamers(arr);
-  };
-
   const othername = () => {
     var input = document.getElementById("newName").value;
     alert(input);
@@ -59,11 +38,11 @@ const Lobby = () => {
         <div className='py-12 flex flex-col-reverse items-center justify-center'>
           <div className='flex flex-col space-y-4 text-black justify-center items-center'>
             <div className='animate-bounce text-center text-black text-lobbyCode font-extrabold'>
-              {roomCode}
+              {roomData.code}
             </div>
             <hr className="text-gray-800 border-2 w-4/5"></hr>
             <p className='text-center text-gray-800 font-normal text-lobbyItem'>
-              {gamers.length}/10
+              {roomData.players.length}/10
             </p>
             <hr className="text-gray-800 border-2 w-4/5"></hr>
             <div className="py-2 text-center items-center justify-center flex space-x-4 text-lobbyItem">
@@ -76,8 +55,8 @@ const Lobby = () => {
           <div className='px-8'>
             <div className="justify-center items-center" style={list_bg}>
             <div className="text-userList px-1 grid gap-1 font-extralight text-justify">
-              {gamers.map((player, i) => {
-                return <UserList user={player.user} isReady={player.isReady} host={player.host} i={i} gamers={gamers} setGamers={newGamers} />
+              {roomData.players.map((player, i) => {
+                return <UserList user={player.name} isReady={player.isReady} host={player.host} i={i} gamers={roomData.players}/>
               })}
               </div>
             </div>

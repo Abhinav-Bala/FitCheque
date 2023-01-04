@@ -3,12 +3,11 @@ import { useState } from 'react';
 import Lobby, { isHost} from './Lobby';
 
 
-const UserList = ({user, isReady, host, i, gamers, setGamers}) => {
+const UserList = ({user, isReady, host, i, gamers, }) => {
 
     const remove = (index) => {
         let a = gamers.slice(0, index);
         let b = a.concat(gamers.slice(index+1))
-        setGamers(b);
     };
 
        return(
@@ -17,13 +16,13 @@ const UserList = ({user, isReady, host, i, gamers, setGamers}) => {
                {host ? 
 
                    <div className='underline ml-4'>
-                       [{user}]:
+                       [{user}]: 
                    </div>
                
                :   
 
                    <div className='ml-4'>
-                       [{user}]:
+                       [{user}]: 
                    </div>
                    
                }
