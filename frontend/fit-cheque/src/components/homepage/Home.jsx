@@ -1,36 +1,37 @@
 import React from 'react'
 import { useState, useEffect} from 'react';
 
-
 const Home = ({socket, error}) => {
   const [roomCode, setRoomCode] = useState("")
   const [username, setUserName] = useState("")
-  const [connected, setConnected] = useState(false)
 
   const connectServer = () => {
     if(username===""){
       alert("Enter a username")
     } else {
-      if(!connected){
-        setConnected(true)
+
+      const sessionID = localStorage.getItem("sessionID");
+
+      if (sessionID) {
+        socket.auth = { sessionID, username };
+      } else {
         socket.auth = {username};
-        socket.connect();
       }
+      socket.connect();
     }
   }
 
-  const validateRoomCode = () => {
+  const joinRoom = () => {
     connectServer()
-    alert("clkicked")
-    socket.emit("join-room");
+    socket.emit("join", ({code: roomCode}))
   }
 
   const createRoom = () => {
     connectServer()
-    socket.emit("create-room");
+    socket.emit("create");
   }
 
-  console.log(username);
+
   return (
      <div>
       <div className='fixed top-2 left-4 right-0  font-bold z-50'> 
@@ -46,16 +47,14 @@ const Home = ({socket, error}) => {
               <div className='underline underline-offset-8 text-left text-heading'>
               JOIN
               </div>
-              <form className='gap-4 flex flex-row py-6'>
+              <div className='gap-4 flex flex-row py-6'>
                 <input onChange={(e) =>setRoomCode(e.target.value)} type="text" className='outline outline-none border-black border-4 text-center w-72 py-2 text-heading font-light' placeholder='ROOM CODE'></input>
-                <button onClick={validateRoomCode} className='bg-black w-16 h-16 items-center border-black border-4 hover:scale-105 hover:shadow-xl'>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="w-14 h-14">
-                  <path fillRule="evenodd" d="M4.72 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L11.69 12 4.72 5.03a.75.75 0 010-1.06zm6 0a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06L17.69 12l-6.97-6.97a.75.75 0 010-1.06z" clipRule="evenodd" />
-                </svg>
+                <button  onClick={joinRoom} className='bg-black w-16 h-16 items-center border-black border-4 hover:scale-105 hover:shadow-xl'>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" className="w-14 h-14">
+                    <path fillRule="evenodd" d="M4.72 3.97a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L11.69 12 4.72 5.03a.75.75 0 010-1.06zm6 0a.75.75 0 011.06 0l7.5 7.5a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 11-1.06-1.06L17.69 12l-6.97-6.97a.75.75 0 010-1.06z" clipRule="evenodd" />
+                  </svg>
                 </button>
-              </form>  
-              {error === "" ? <p className='text-transparent py-2'>j</p> : <p className='text-red-300'>{error}</p>}
-
+              </div> 
               <div className='w-16 pb-24'>
                 <button onClick={createRoom} className='underline underline-offset-8 hover:font-bold hover:cursor-pointer text-left text-heading'>
                     HOST

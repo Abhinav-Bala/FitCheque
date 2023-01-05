@@ -1,10 +1,8 @@
 import React from 'react'
-import { useState } from 'react';
-import Lobby, { isHost} from './Lobby';
 
 
-const UserList = ({user, isReady, host, i, gamers, }) => {
-
+const UserList = ({user, isReady, host, i, gamers }) => {
+    console.log(host)
     const remove = (index) => {
         let a = gamers.slice(0, index);
         let b = a.concat(gamers.slice(index+1))
@@ -13,16 +11,16 @@ const UserList = ({user, isReady, host, i, gamers, }) => {
        return(
            <div className= "font-normal pt-2 text-left grid grid-cols-1 grid-flow-col-dense justify-center items-center">
               
-               {host ? 
+               {host==true ? 
 
                    <div className='underline ml-4'>
-                       [{user}]: 
+                       {user}: 
                    </div>
                
                :   
 
                    <div className='ml-4'>
-                       [{user}]: 
+                       {user}: 
                    </div>
                    
                }
@@ -36,7 +34,7 @@ const UserList = ({user, isReady, host, i, gamers, }) => {
                    <div className='px-2 bg-gray-400 text-white'>NOT READY</div>
                }
 
-               {isHost & host ? 
+               {i==0 ? 
                
                <div className='pl-10 flex col-span-6'>
                        <div className='pr-1 text-black'>
@@ -46,7 +44,7 @@ const UserList = ({user, isReady, host, i, gamers, }) => {
                        </div>
                      </div> : null}
 
-               {isHost & i!=0 ? 
+               {host==true && i!=0 ? 
                   
                    <div className='pl-6 flex col-span-6'>
                        <button className='px-2 text-black hover:bg-black hover:text-white active:bg-red-400 transition duration-150 ease-in-out' onClick={()=>remove(i)}>
