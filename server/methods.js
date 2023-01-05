@@ -1,3 +1,5 @@
+const {Room, Player} = require('./game.js')
+
 const rooms = new Set();
 const roomArray = [];
 
@@ -12,13 +14,15 @@ const generateCode = () => {
     return result;
 }
 
+const ready = (data) => {
+    data.currRoom.players
+}
+
 const joinRoom = (data) => {
-    const code = data.code
-    const player = data.player
-    if(rooms.has(code) == false){
+    if(rooms.has(data.code) == false){
         return {error: "This room does not exist."}
     } else {
-        const currRoomFiltered = roomArray.filter(room => room.code = code);
+        const currRoomFiltered = roomArray.filter(room => room.code = data.code);
         const currRoom = currRoomFiltered[0];
         if(currRoom.players.length > 10){
             return {error: "This room is full."}
@@ -26,7 +30,7 @@ const joinRoom = (data) => {
         if(currRoom.state !== "lobby"){
             return {error: "This room's game is in progress."}
         }
-        player.name = "player" + (currRoom.players.length + 1);
+        player = new Player({username: data.username, uid: data.uid})
         currRoom.players.push(player);
         return {currRoom:currRoom};
     }
@@ -34,10 +38,13 @@ const joinRoom = (data) => {
 
 const createRoom = (player) => {
     const newCode = generateCode()
-    const newRoom = {code: newCode, players: [], state: "lobby"};
-    newRoom.players.push(player)
+    
+    const newRoom = new Room({code: newCode, uid: player.uid, username: player.username})
+
+    //check if this is the optimal method
     rooms.add(newCode)
     roomArray.push(newRoom);
     return newRoom;
 }
+
 module.exports = {createRoom, joinRoom, generateCode};

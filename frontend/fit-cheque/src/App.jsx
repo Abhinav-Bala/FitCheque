@@ -8,11 +8,12 @@ function App() {
 
   const roomReducer = (state, action) => {
     switch (action.type) {
-      case "init-room":
+      case "update-room":
         return {
           code: action.newCode,
           players: action.newPlayers,
-          state: action.newState
+          state: action.newState,
+          host: action.newHost,
         }
       default:
         return state;
@@ -21,8 +22,9 @@ function App() {
   
   const [error, setError] = useState("")
   const navigate = useNavigate();
+  const [currState, setCurrState] = useState("/")
 
-  const initialRoomData = {code: 0, players: [], state: "home"}
+  const initialRoomData = {code: 0, players: [], state: "home", host: null}
   const [roomData, dispatch] = useReducer(roomReducer, initialRoomData)
 
   useEffect(() => {
@@ -30,23 +32,46 @@ function App() {
       setError(data.error)
     })
 
-    socket.on("connect_error", (err) => {
-      alert(err.message)
+    socket.on("connect_error", (data) => {
+      alert(data.message)
     });
 
-    socket.on("lobby", (data) => {
-      dispatch({type: "init-room", newCode: data.room.code, newPlayers: data.room.players, newState: data.room.state})
-      navigate('/lobby')
+    socket.on("update-state", (data) => {
+      const room = data.room;
+      dispatch({type: "update-room", newCode: room.code, newPlayers: room.players, newState: room.state, newHost: room.host})
+      if(currState !== room.state){
+        if(room.state === "game"){
+          navigate("/game")
+        } else if (room.state === "loading"){
+          navigate("/loading")
+        } else if(room.state === "lobby"){
+          navigate("/lobby")
+        }
+      }
+    })
+
+    socket.on("session", ({ sessionID, userID }) => {
+      // attach the session ID to the next reconnection attempts
+      socket.auth = { sessionID };
+      // store it in the localStorage
+      localStorage.setItem("sessionID", sessionID);
+      // save the ID of the user
+      socket.userID = userID;
+    });
+
+    socket.on("error", (data) => {
+        alert(data.message)
     })
 
     return () => {
       socket.off("error")
       socket.off("connect-error")
       socket.off("lobby")
+      socket.off("session")
+      socket.off("update-state")
     }
   },[])
 
-  console.log(error)
   return (
     <div className="font-display">
       <Routes>
