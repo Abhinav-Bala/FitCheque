@@ -76,8 +76,8 @@ function App() {
   return (
     <div className="font-display">
       <Routes>
-        <Route path='/' exact element={<Home />} />
-        <Route path="/lobby" element={<Lobby/>} exact />
+        <Route path='/' exact element={<Home socket={socket} />} />
+        <Route path="/lobby" element={<Lobby socket={socket} roomData={roomData}/>} exact />
         <Route path="/game" element={<Game/>} exact />
       </Routes>
     </div>
