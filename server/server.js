@@ -20,6 +20,8 @@ const io = new Server(server, {
   },
 });
 
+//follow this to fix no module found error https://www.freecodecamp.org/news/error-cannot-find-module-node-npm-error-solved/
+
 //retrieved from https://socket.io/get-started/private-messaging-part-2/
 io.use((socket, next) => {
   const sessionID = socket.handshake.auth.sessionID;
