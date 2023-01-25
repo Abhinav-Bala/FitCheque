@@ -64,17 +64,17 @@ const Lobby = ({socket, roomData}) => {
             </div>
           </div>
             <div className='flex justify-center space-x-10 pt-3'>
-              {host ? null : <button  className='px-4 py-3 text-black bg-gray-200 baseline hover:bg-black hover:text-white active:bg-green-400 focus:outline-white focus:animate-pulse focus:text-white focus:bg-green-400 focus:border-green-700 transition duration-150 ease-in-out'>
-                <p className='max-w-3xl w-auto h-auto text-center text-lobbyItem'>
+              {host ? null : <button onClick={ready}  className='px-4 py-3 text-black bg-gray-200 baseline hover:bg-black hover:text-white active:bg-green-400 focus:outline-white focus:animate-pulse focus:text-white focus:bg-green-400 focus:border-green-700 transition duration-150 ease-in-out'>
+                <div className='max-w-3xl w-auto h-auto text-center text-lobbyItem'>
                   READY
-                </p>
+                </div>
               </button>
               }
               {host ? 
                 <button className='px-4 py-3 bg-black text-white hover:bg-green-400  active:bg-green-600 focus:bg-green-400 focus:border-green-700 transition duration-150 ease-in-out'>
-                <p className='text-lobbyItem text-center'>
+                <div className='text-lobbyItem text-center'>
                   START GAME
-                </p>
+                </div>
               </button>
               :
               null              
@@ -92,7 +92,7 @@ const Lobby = ({socket, roomData}) => {
         </div> 
         <div className='fixed text-black top-44 left-20'>
           <h1>
-            [SICK ASS FIT]
+            [INSERT SICK FIT]
           </h1>
           </div>
         <div className='text-left fixed text-black top-40 right-24 space-y-4'>

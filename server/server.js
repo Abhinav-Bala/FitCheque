@@ -7,7 +7,7 @@ const crypto = require("crypto");
 const randomId = () => crypto.randomBytes(8).toString("hex");
 const { InMemorySessionStore } = require("./sessionStore");
 const sessionStore = new InMemorySessionStore();
-const { createRoom, joinRoom} = require('./methods');
+const { createRoom, joinRoom, ready} = require('./methods');
 const { readSync } = require('fs');
 app.use(cors())
 
@@ -82,7 +82,8 @@ io.on("connection", (socket) => {
 
   socket.on("ready", (data) => {
     console.log(socket.username + " is ready")
-    currRoom = ready(data.room, socket.uid)
+    currRoom = ready({room: data.room, uid: socket.sessionID})
+    io.to(currRoom.code).emit("update-state", {room: currRoom})
   })
 
   socket.on("disconnect", async () => {

@@ -15,7 +15,12 @@ const generateCode = () => {
 }
 
 const ready = (data) => {
-    data.currRoom.players
+    filteredPlayer = data.room.players.filter(player => player.uid = data.uid)
+    console.log(filteredPlayer)
+    for(let i = 0; i < filteredPlayer.length; i++){
+        filteredPlayer[i].isReady=true;
+    }
+    return data.room
 }
 
 const joinRoom = (data) => {
@@ -47,4 +52,4 @@ const createRoom = (player) => {
     return newRoom;
 }
 
-module.exports = {createRoom, joinRoom, generateCode};
+module.exports = {createRoom, joinRoom, generateCode, ready};
