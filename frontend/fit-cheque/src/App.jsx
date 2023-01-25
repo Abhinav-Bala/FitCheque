@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate} from 'react-router-dom'
 import socket from './utils/socket'
 import Home from './components/homepage/Home'
 import Lobby from './components/lobby/Lobby'
+import Game from './components/game/Game'
 
 function App() {
 
@@ -75,8 +76,9 @@ function App() {
   return (
     <div className="font-display">
       <Routes>
-        <Route path='/' exact element={<Home socket={socket}  error={error}/>} />
-        <Route path="/lobby" element={<Lobby socket={socket} roomData={roomData}/>} exact />
+        <Route path='/' exact element={<Home />} />
+        <Route path="/lobby" element={<Lobby/>} exact />
+        <Route path="/game" element={<Game/>} exact />
       </Routes>
     </div>
   )
