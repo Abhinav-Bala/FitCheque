@@ -88,7 +88,7 @@ const countdown = (x) => {
     x = x-1;
 }
 
-const Game = () => {
+const Game = ({socket, gameData}) => {
   
     const players = [
     {user: "Alice", checkedOut: -2, guess: 100, total: 5000, host: true},

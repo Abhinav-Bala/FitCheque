@@ -78,7 +78,7 @@ function App() {
       <Routes>
         <Route path='/' exact element={<Home socket={socket} />} />
         <Route path="/lobby" element={<Lobby socket={socket} roomData={roomData}/>} exact />
-        <Route path="/game" element={<Game/>} exact />
+        <Route path="/game" element={<Game socket={socket} roomData={roomData}/>} exact />
       </Routes>
     </div>
   )

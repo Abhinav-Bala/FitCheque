@@ -34,7 +34,7 @@ const Home = ({socket, error}) => {
 
   return (
      <div>
-      <div className='fixed top-2 left-4 right-0  font-bold z-50'> 
+      <div className='fixed top-2 left-4 right-0  text-title font-bold z-50'> 
         FIT CHEQUE
       </div>
       <div className='h-screen w-screen grid grid-cols-12 max-h-screen'>
@@ -64,8 +64,8 @@ const Home = ({socket, error}) => {
               <div className='text-center'>Made by Abhinav and Sumedh. Designed by Lillian. Images retreived from SSENSE.</div>
             </div>
         </div>
-        <div className='col-span-8 h-screen bg-white'>
-
+        <div className='col-span-8 h-screen bg-white py-56 px-10'>
+          <img className='row-span-8' src='assets/homepage-graphic.png'/>
         </div>
       </div>
      </div>

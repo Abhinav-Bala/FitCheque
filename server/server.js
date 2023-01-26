@@ -64,6 +64,13 @@ io.on("connection", (socket) => {
 
   });
 
+  socket.on("startGame", (payload) => {
+    currRoom = payload.room
+    currRoom.state = "game"
+    io.to(currRoom.code).emit("update-state", {room: currRoom})
+
+  })
+
   socket.on("checkedOut", (payload) => {
     payload.guess
 
